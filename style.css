@@ -139,6 +139,15 @@ td {
   text-align: right;
 }
 
+.pay-head-row th {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 14px 8px;
+}
+
+
 .net-row th {
   font-size: 30px;
   padding: 10px;
@@ -193,6 +202,11 @@ td {
 
   .company-header {
     font-size: 20px;
+  }
+
+  .pay-head-row th {
+    font-size: 28px;
+    padding: 12px 8px;
   }
 
   .net-row th {
