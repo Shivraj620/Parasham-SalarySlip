@@ -70,37 +70,81 @@ function generatePDF() {
   const data = calculateSlip();
   const doc = new jsPDF("p", "mm", "a4");
 
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(16);
-  doc.text("M/S PARASHAM MANPOWER SERVICES PVT LTD.", 15, 14);
+  const marginTop = 19.05;
+  const marginBottom = 19.05;
+  const marginLeft = 17.78;
+  const marginRight = 17.78;
 
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  doc.text("SHIBU KUNJ ARYA SAMAJ MANDIR ROAD, LANE NO 21 RPS MORE", 15, 20);
-  doc.text("DANAPUR, DISTRICT-PATNA (BIHAR)-801503", 15, 25);
-  doc.text("Mob No- 7070376333", 15, 30);
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const contentWidth = pageWidth - marginLeft - marginRight;
+
+  const leftX = marginLeft;
+  const rightX = pageWidth - marginRight;
+  const centerX = leftX + contentWidth / 2;
+  const borderTop = marginTop;
 
   doc.setLineWidth(0.3);
-  doc.rect(12, 8, 186, 188);
-  doc.line(12, 34, 198, 34);
 
   doc.setFont("helvetica", "bold");
-  doc.text("Employee Details", 15, 41);
+  doc.setFontSize(11);
+  doc.text("M/S PARASHAM MANPOWER SERVICES PVT LTD.", centerX, borderTop + 10, { align: "center" });
+  doc.line(leftX, borderTop + 15, rightX, borderTop + 15);
+
   doc.setFont("helvetica", "normal");
-  doc.text(`Employee Name: ${data.name || "-"}`, 15, 48);
-  doc.text(`Location: ${data.location || "-"}`, 120, 48);
-  doc.text(`Designation: ${data.designation || "-"}`, 15, 55);
-  doc.text(`Month: ${data.month || "-"}`, 15, 62);
-  doc.line(12, 66, 198, 66);
+  doc.setFontSize(8.3);
+  doc.text("SHIBU KUNJ ARYA SAMAJ MANDIR ROAD, LANE NO 21 RPS MORE DANAPUR,", leftX + 4, borderTop + 22);
+  doc.text("DISTRICT-PATNA (BIHAR)-801503", leftX + 4, borderTop + 27.5);
+  doc.text("Mob No- 7070376333", leftX + 4, borderTop + 33);
+  doc.line(leftX, borderTop + 36.5, rightX, borderTop + 36.5);
 
   doc.setFont("helvetica", "bold");
-  doc.text("Earnings", 55, 73);
-  doc.text("Deduction", 145, 73);
-  doc.line(105, 66, 105, 170);
+  doc.setFontSize(9.8);
+  doc.text("Employee Details", leftX + 1.2, borderTop + 43);
+  doc.line(leftX, borderTop + 46, rightX, borderTop + 46);
+
+  const colA = leftX;
+  const colB = leftX + contentWidth * 0.285;
+  const colC = leftX + contentWidth * 0.507;
+  const colD = leftX + contentWidth * 0.760;
+  const colE = rightX;
+
+  doc.line(colB, borderTop + 46, colB, borderTop + 68.5);
+  doc.line(colD, borderTop + 46, colD, borderTop + 68.5);
+  doc.line(colC, borderTop + 46, colC, borderTop + 110.5);
 
   doc.setFont("helvetica", "normal");
+  doc.setFontSize(8.6);
+
+  const row1Y = borderTop + 52.5;
+  const row2Y = borderTop + 59.5;
+  const row3Y = borderTop + 66.5;
+
+  doc.text("Employee Name :", colA + 4, row1Y);
+  doc.text(data.name || "-", colB + 1.2, row1Y, { maxWidth: colC - colB - 2 });
+  doc.text("Location :", colC + 22, row1Y);
+  doc.text(data.location || "-", colD + 1.2, row1Y, { maxWidth: colE - colD - 2 });
+  doc.line(leftX, borderTop + 54.5, rightX, borderTop + 54.5);
+
+  doc.text("Designation :", colA + 4, row2Y);
+  doc.text(data.designation || "-", colB + 1.2, row2Y, { maxWidth: colC - colB - 2 });
+  doc.line(leftX, borderTop + 61.5, rightX, borderTop + 61.5);
+
+  doc.text("Month :", colA + 4, row3Y);
+  doc.text(data.month || "-", colB + 1.2, row3Y, { maxWidth: colC - colB - 2 });
+  doc.line(leftX, borderTop + 68.5, rightX, borderTop + 68.5);
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(10.2);
+  doc.text("Earnings", (colA + colC) / 2, borderTop + 76.5, { align: "center" });
+  doc.text("Deduction", (colC + colE) / 2, borderTop + 76.5, { align: "center" });
+  doc.line(leftX, borderTop + 80, rightX, borderTop + 80);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9.5);
+
   const left = [
-    ["Working Day", data.days],
+    ["Working Day", String(data.days)],
     ["Basic & DA", fmt(data.basic)],
     ["Uniform Allowance", fmt(data.uniformAllowance)],
     ["Relieving Charge", fmt(data.relievingCharge)],
@@ -114,22 +158,31 @@ function generatePDF() {
     ["Total Deduction", fmt(data.totalDeduction)],
   ];
 
-  let y = 82;
+  let rowTop = borderTop + 80;
   for (let i = 0; i < left.length; i += 1) {
-    doc.text(String(left[i][0]), 15, y);
-    doc.text(String(left[i][1]), 95, y, { align: "right" });
-    doc.text(String(right[i][0]), 110, y);
-    doc.text(String(right[i][1]), 195, y, { align: "right" });
-    y += 10;
-    doc.line(12, y - 4, 198, y - 4);
+    const baseY = rowTop + 5.8;
+    doc.text(left[i][0], colA + 4, baseY);
+    doc.text(left[i][1], colC - 4, baseY, { align: "right" });
+    doc.text(right[i][0], colC + 4, baseY);
+    doc.text(right[i][1], colE - 4, baseY, { align: "right" });
+    rowTop += 8.2;
+    doc.line(leftX, rowTop, rightX, rowTop);
   }
 
   doc.setFont("helvetica", "bold");
-  doc.text("Net Pay (In Hand)", 15, 140);
-  doc.text(fmt(data.net), 195, 140, { align: "right" });
+  doc.setFontSize(11);
+  const netY = rowTop + 6.6;
+  doc.text("Net Pay (In Hand)", (colA + colC) / 2, netY, { align: "center" });
+  doc.text(fmt(data.net), (colC + colE) / 2, netY, { align: "center" });
+
+  const borderBottom = rowTop + 10;
+  doc.rect(leftX, borderTop, contentWidth, borderBottom - borderTop);
+  doc.line(colC, borderTop + 68.5, colC, borderBottom);
 
   doc.setFont("helvetica", "normal");
-  doc.text("Employer Signature / Authorized Signatory", 15, 188);
+  doc.setFontSize(10);
+  const signatureY = Math.min(borderBottom + 26, pageHeight - marginBottom);
+  doc.text("Employer Signature / Authrozied Signatory", leftX + 1, signatureY);
 
   doc.save(`Salary_Slip_${(data.name || "Employee").replace(/\s+/g, "_")}.pdf`);
 }
