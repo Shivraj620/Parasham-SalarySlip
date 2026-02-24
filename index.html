@@ -1,6 +1,97 @@
-<input id="name" placeholder="Employee Name">
-<input id="designation" placeholder="Designation">
-<input id="location" placeholder="Duty Location">
-<input id="month" placeholder="Month">
-<input id="days" type="number" placeholder="Working Days">
-<input id="basic" type="number" placeholder="Basic & DA">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parasham Salary Slip</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="card form-card">
+      <h1>Salary Slip Generator</h1>
+      <p class="subtext">Fill details to generate and preview a properly formatted salary slip.</p>
+
+      <div class="form-grid">
+        <label>Employee Name<input id="name" placeholder="Employee Name" /></label>
+        <label>Designation<input id="designation" placeholder="Designation" /></label>
+        <label>Duty Location<input id="location" placeholder="Duty Location" /></label>
+        <label>Month<input id="month" placeholder="Jan-2026" /></label>
+        <label>Working Days<input id="days" type="number" placeholder="26" /></label>
+        <label>Basic &amp; DA<input id="basic" type="number" placeholder="11024" /></label>
+        <label>Uniform Allowance<input id="uniformAllowance" type="number" placeholder="0" /></label>
+        <label>Relieving Charge<input id="relievingCharge" type="number" placeholder="0" /></label>
+        <label>Uniform Deduction<input id="uniformDeduction" type="number" placeholder="0" /></label>
+        <label>Advance<input id="advance" type="number" placeholder="0" /></label>
+      </div>
+
+      <div class="actions">
+        <button id="previewBtn" type="button">Update Preview</button>
+        <button id="pdfBtn" type="button">Download PDF</button>
+      </div>
+    </section>
+
+    <section class="card slip-card">
+      <div id="slipPreview" class="salary-slip">
+        <div class="company-header">M/S PARASHAM MANPOWER SERVICES PVT LTD.</div>
+        <div class="company-address">
+          SHIBU KUNJ ARYA SAMAJ MANDIR ROAD, LANE NO 21 RPS MORE<br />
+          DANAPUR, DISTRICT-PATNA (BIHAR)-801503<br />
+          Mob No- 7070376333
+        </div>
+
+        <table>
+          <tr><th class="section-title" colspan="4">Employee Details</th></tr>
+          <tr>
+            <td>Employee Name :</td><td id="sName" class="strong">-</td>
+            <td>Location :</td><td id="sLocation" class="strong">-</td>
+          </tr>
+          <tr>
+            <td>Designation :</td><td id="sDesignation">-</td>
+            <td></td><td></td>
+          </tr>
+          <tr>
+            <td>Month :</td><td id="sMonth">-</td>
+            <td></td><td></td>
+          </tr>
+
+          <tr>
+            <th colspan="2">Earnings</th>
+            <th colspan="2">Deduction</th>
+          </tr>
+          <tr>
+            <td>Working Day</td><td id="sDays" class="num">0</td>
+            <td>PF</td><td id="sPf" class="num">0.00</td>
+          </tr>
+          <tr>
+            <td>Basic &amp; DA</td><td id="sBasic" class="num">0.00</td>
+            <td>ESIC</td><td id="sEsic" class="num">0.00</td>
+          </tr>
+          <tr>
+            <td>Uniform Allowance</td><td id="sUniformAllowance" class="num">0.00</td>
+            <td>Uniform</td><td id="sUniformDeduction" class="num">0.00</td>
+          </tr>
+          <tr>
+            <td>Relieving Charge</td><td id="sRelievingCharge" class="num">0.00</td>
+            <td>Advance</td><td id="sAdvance" class="num">0.00</td>
+          </tr>
+          <tr>
+            <td>Gross Salary</td><td id="sGross" class="num">0.00</td>
+            <td>Total Deduction</td><td id="sTotalDeduction" class="num">0.00</td>
+          </tr>
+          <tr class="net-row">
+            <th colspan="2">Net Pay (In Hand)</th>
+            <th colspan="2" id="sNet">0.00</th>
+          </tr>
+          <tr>
+            <td colspan="4" class="signature-space">Employer Signature / Authorized Signatory</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
