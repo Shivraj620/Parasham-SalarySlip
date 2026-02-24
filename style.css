@@ -121,6 +121,16 @@ td {
   font-size: 16px;
 }
 
+
+.earnings-deduction-header th {
+  text-align: center;
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 1.1;
+  padding: 14px 8px;
+  white-space: nowrap;
+}
+
 .strong {
   font-weight: 700;
 }
