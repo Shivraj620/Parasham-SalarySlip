@@ -109,6 +109,9 @@ function generatePDF() {
   const colD = leftX + contentWidth * 0.760;
   const colE = rightX;
 
+  doc.line(colB, borderTop + 46, colB, borderTop + 68.5);
+  doc.line(colD, borderTop + 46, colD, borderTop + 68.5);
+  doc.line(colC, borderTop + 46, colC, borderTop + 110.5);
   [colB, colC, colD].forEach((x) => {
     doc.line(x, borderTop + 46, x, borderTop + 74);
   });
