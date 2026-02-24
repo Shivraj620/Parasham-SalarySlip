@@ -81,6 +81,7 @@ button:last-child {
 
 .salary-slip {
   border: 1px solid #888;
+  background: #fff;
 }
 
 .company-header {
@@ -128,9 +129,9 @@ td {
   padding: 10px;
 }
 
-.signature-space {
-  height: 120px;
-  vertical-align: bottom;
+.signature-note {
+  margin-top: 90px;
+  padding-left: 6px;
   font-size: 20px;
 }
 
@@ -145,5 +146,10 @@ td {
 
   .net-row th {
     font-size: 22px;
+  }
+
+  .signature-note {
+    margin-top: 32px;
+    font-size: 16px;
   }
 }
