@@ -80,6 +80,11 @@ button:last-child {
 }
 
 .salary-slip {
+  width: 100%;
+  max-width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fff;
   border: 1px solid #888;
   background: #fff;
 }
@@ -133,6 +138,42 @@ td {
   margin-top: 90px;
   padding-left: 6px;
   font-size: 20px;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 25.4mm;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .app-shell {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+
+  .form-card {
+    display: none;
+  }
+
+  .slip-card {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .salary-slip {
+    width: 100%;
+    max-width: none;
+    min-height: auto;
+    border: 1px solid #888;
+  }
 }
 
 @media (max-width: 900px) {

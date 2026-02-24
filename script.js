@@ -112,6 +112,9 @@ function generatePDF() {
   doc.line(colB, borderTop + 46, colB, borderTop + 68.5);
   doc.line(colD, borderTop + 46, colD, borderTop + 68.5);
   doc.line(colC, borderTop + 46, colC, borderTop + 110.5);
+  [colB, colC, colD].forEach((x) => {
+    doc.line(x, borderTop + 46, x, borderTop + 74);
+  });
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8.6);
@@ -138,6 +141,7 @@ function generatePDF() {
   doc.setFontSize(10.2);
   doc.text("Earnings", (colA + colC) / 2, borderTop + 76.5, { align: "center" });
   doc.text("Deduction", (colC + colE) / 2, borderTop + 76.5, { align: "center" });
+  doc.line(colC, borderTop + 68.5, colC, borderTop + 110.5);
   doc.line(leftX, borderTop + 80, rightX, borderTop + 80);
 
   doc.setFont("helvetica", "normal");
