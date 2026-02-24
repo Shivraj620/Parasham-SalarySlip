@@ -94,7 +94,7 @@ function generatePDF() {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8.3);
   doc.text("SHIBU KUNJ ARYA SAMAJ MANDIR ROAD, LANE NO 21 RPS MORE DANAPUR,", leftX + 4, borderTop + 22);
-  doc.text("DISTRICT-PATNA (BIHAR)-801503", leftX + 4, borderTop + 27.5);
+  doc.text("PATNA (BIHAR)-801503", leftX + 4, borderTop + 27.5);
   doc.text("Mob No- 7070376333", leftX + 4, borderTop + 33);
   doc.line(leftX, borderTop + 36.5, rightX, borderTop + 36.5);
 
